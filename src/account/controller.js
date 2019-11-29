@@ -1,4 +1,4 @@
-const Account = require("../models/account");
+import Account, { findById, find, findByIdAndUpdate } from "../models/account";
 
 const createNewAccount = acc => {
     const newAccount = new Account(acc);
@@ -7,16 +7,23 @@ const createNewAccount = acc => {
 
 
 const getAccountById = id => {
-    return Account.findById(id);
+    return findById(id);
 };
 
 
 const getAccounts = () => {
-    return Account.find();
+    return find();
 };
 
-module.exports = {
-    createNewAccount: createNewAccount,
-    getAccountById: getAccountById,
-    getAccounts: getAccounts
-}
+const updateBalance = (id, amount) => {
+    return findByIdAndUpdate(id, {
+        $inc: {
+            balance: amount
+        }
+    });
+};
+
+export const createNewAccount = createNewAccount;
+export const getAccountById = getAccountById;
+export const getAccounts = getAccounts;
+export const updateBalance = updateBalance;

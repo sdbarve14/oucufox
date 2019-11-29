@@ -1,11 +1,7 @@
-const { Router } = require('express')
+import { Router } from 'express';
 //const Account = require("../models/account")
 const router = Router();
-const {
-    createNewAccount,
-    getAccountById,
-    getAccounts
-} = require("./controller")
+import { createNewAccount, getAccountById, getAccounts } from "./controller";
 
 
 
@@ -54,4 +50,4 @@ router.get("/:id", (req, res) => {
 
 
 
-module.exports = router;
+export default router;

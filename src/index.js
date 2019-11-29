@@ -1,16 +1,16 @@
-const express = require('express')
-const parser = require('body-parser') //Middleware
+import express from 'express'
+import { json, urlencoded } from 'body-parser' //Middleware
 const app = express()
-const Customer = require("./models/customer")
-const mongoose = require("mongoose")
+import Customer from "./models/customer"
+import { connect } from "mongoose"
 
-const customerRoutes = require("./customer/routes")
-const accountRoutes = require("./account/routes")
-const transRoutes = require("./transactions/routes")
+import customerRoutes from "./customer/routes"
+import accountRoutes from "./account/routes"
+import transRoutes from "./transactions/routes"
 
-app.use(parser.json());
+app.use(json());
 app.use(
-    parser.urlencoded({
+    urlencoded({
         extended: false
     })
 );
@@ -78,7 +78,7 @@ app.get("/customer/:id", (req, res) => {
 
 app.listen(4000)
 
-mongoose.connect(
+connect(
     "mongodb+srv://root:root@cluster0-pzvpn.mongodb.net/test?retryWrites=true&w=majority",
     { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }
 ).then(res => {
